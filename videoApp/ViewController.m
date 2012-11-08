@@ -40,7 +40,7 @@
         imagePicker.sourceType =
         UIImagePickerControllerSourceTypeCamera;
         imagePicker.mediaTypes = [NSArray arrayWithObjects:
-                                  (NSString *) kUTTypeImage,
+                                  (NSString *) kUTTypeMovie,
                                   nil];
         imagePicker.allowsEditing = NO;
         [self presentModalViewController:imagePicker
@@ -61,7 +61,7 @@
         imagePicker.sourceType =
         UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = [NSArray arrayWithObjects:
-                                  (NSString *) kUTTypeImage,
+                                  (NSString *) kUTTypeMovie,
                                   nil];
         imagePicker.allowsEditing = NO;
         [self presentModalViewController:imagePicker animated:YES];
@@ -75,7 +75,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     NSString *mediaType = [info
                            objectForKey:UIImagePickerControllerMediaType];
     [self dismissModalViewControllerAnimated:YES];
-    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+    if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
         UIImage *image = [info
                           objectForKey:UIImagePickerControllerOriginalImage];
         
