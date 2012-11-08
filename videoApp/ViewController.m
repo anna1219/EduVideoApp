@@ -78,6 +78,7 @@
     if ([self.popoverController isPopoverVisible]) {
         [self.popoverController dismissPopoverAnimated:YES];
         [popoverController release];
+        
     } else {
         if ([UIImagePickerController isSourceTypeAvailable:
              UIImagePickerControllerSourceTypeSavedPhotosAlbum])
@@ -111,9 +112,6 @@
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [self.popoverController dismissPopoverAnimated:true];
-    [popoverController release];
-    
     NSString *mediaType = [info
                            objectForKey:UIImagePickerControllerMediaType];
     [self dismissModalViewControllerAnimated:YES];
