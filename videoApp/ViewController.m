@@ -125,11 +125,25 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         imageView.image = video;
         
         if (newMedia)
-            UISaveVideoAtPathToSavedPhotosAlbum(mediaPath,
-                                                self,
-                                                @selector(video:didFinishSavingWithError:contextInfo:),
-                                                NULL);
+            [self SaveVideoAtPathToAppDirectory:mediaPath];
+         //   UISaveVideoAtPathToSavedPhotosAlbum(mediaPath,
+         //                                       self,
+         //                                       @selector(video:didFinishSavingWithError:contextInfo:),
+         //                                       NULL);
         }
+}
+
+- (void)SaveVideoAtPathToAppDirectory:(NSString *)mediaPath
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,  NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSError *error;
+    
+    NSLog(@"documentPath - %@", documentPath);
+    
+    [[NSFileManager defaultManager] copyItemAtPath:mediaPath
+                                            toPath:documentPath
+                                             error:&error];    
 }
 
 - (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo: (void *)contextInfo
