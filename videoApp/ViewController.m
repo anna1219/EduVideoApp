@@ -50,6 +50,10 @@
 
 - (IBAction) useCamera: (id)sender
 {
+    if ([self.popoverController isPopoverVisible]) {
+        [self.popoverController dismissPopoverAnimated:YES];
+        [popoverController release];}
+    
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeCamera])
     {
