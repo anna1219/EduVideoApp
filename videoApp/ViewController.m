@@ -15,12 +15,26 @@
 
 @implementation ViewController
 
-@synthesize imageView;
+@synthesize imageView, popoverController, toolbar;
 
 - (void)viewDidLoad
 {
+    UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc]
+                                     initWithTitle:@"Camera"
+                                     style:UIBarButtonItemStyleBordered
+                                     target:self
+                                     action:@selector(useCamera:)];
+    UIBarButtonItem *cameraRollButton = [[UIBarButtonItem alloc]
+                                         initWithTitle:@"Camera Roll"
+                                         style:UIBarButtonItemStyleBordered
+                                         target:self
+                                         action:@selector(useCameraRoll:)];
+    NSArray *items = [NSArray arrayWithObjects: cameraButton,
+                      cameraRollButton, nil];
+    [toolbar setItems:items animated:NO];
+    [cameraButton release];
+    [cameraRollButton release];
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,7 +43,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction) useCamera
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction) useCamera: (id)sender
 {
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeCamera])
@@ -45,66 +64,82 @@
         imagePicker.allowsEditing = NO;
         [self presentModalViewController:imagePicker
                                 animated:YES];
-        newMedia = YES;
-        
+        [imagePicker release];
+        newMedia = YES;        
     }
 }
 
-- (IBAction) useCameraRoll
+- (IBAction) useCameraRoll: (id)sender
 {
-    if ([UIImagePickerController isSourceTypeAvailable:
-         UIImagePickerControllerSourceTypeSavedPhotosAlbum])
-    {
-        UIImagePickerController *imagePicker =
-        [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.sourceType =
-        UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.mediaTypes = [NSArray arrayWithObjects:
-                                  (NSString *) kUTTypeMovie,
-                                  nil];
-        imagePicker.allowsEditing = NO;
-        [self presentModalViewController:imagePicker animated:YES];
-        newMedia = NO;
+    if ([self.popoverController isPopoverVisible]) {
+        [self.popoverController dismissPopoverAnimated:YES];
+        [popoverController release];
+    } else {
+        if ([UIImagePickerController isSourceTypeAvailable:
+             UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+        {
+            UIImagePickerController *imagePicker =
+            [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType =
+            UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePicker.mediaTypes = [NSArray arrayWithObjects:
+                                      (NSString *) kUTTypeMovie,
+                                      nil];
+            imagePicker.allowsEditing = NO;
+            
+            self.popoverController = [[UIPopoverController alloc]
+                                      initWithContentViewController:imagePicker];
+            
+            popoverController.delegate = self;
+            
+            [self.popoverController
+             presentPopoverFromBarButtonItem:sender
+             permittedArrowDirections:UIPopoverArrowDirectionUp
+             animated:YES];
+            
+            [imagePicker release];
+            newMedia = NO;
+        }
     }
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    [self.popoverController dismissPopoverAnimated:true];
+    [popoverController release];
+    
     NSString *mediaType = [info
                            objectForKey:UIImagePickerControllerMediaType];
     [self dismissModalViewControllerAnimated:YES];
+   
     if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
-        UIImage *image = [info
+    
+        UIImage *video = [info
                           objectForKey:UIImagePickerControllerOriginalImage];
+        NSString *mediaPath = [[info objectForKey:UIImagePickerControllerMediaURL] path];
         
-        imageView.image = image;
+        imageView.image = video;
+        
         if (newMedia)
-            UIImageWriteToSavedPhotosAlbum(image,
-                                           self,
-                                           @selector(image:finishedSavingWithError:contextInfo:),
-                                           nil);
-    }
-    else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
-    {
-		// Code here to support video if enabled
-	}
+            UISaveVideoAtPathToSavedPhotosAlbum(mediaPath,
+                                                self,
+                                                @selector(video:didFinishSavingWithError:contextInfo:),
+                                                NULL);
+        }
 }
 
--(void)image:(UIImage *)image
-finishedSavingWithError:(NSError *)error
- contextInfo:(void *)contextInfo
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo: (void *)contextInfo
 {
-    if (error) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Save failed"
-                              message: @"Failed to save image"\
-                              delegate: nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
+    if (!videoPath && error)
+    {
+        NSLog(@"Error saving video to saved photos roll: %@, %@", error, [error userInfo]);
+        // Handle error;
+        return;
     }
+    
+    // Video was saved properly. UI may need to be updated here.
 }
 
 

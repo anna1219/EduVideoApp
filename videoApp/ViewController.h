@@ -11,13 +11,17 @@
 
 @interface ViewController : UIViewController
 <UIImagePickerControllerDelegate,
-UINavigationControllerDelegate>
+UINavigationControllerDelegate,UIPopoverControllerDelegate>
 {
+    UIToolbar *toolbar;
+    UIPopoverController *popoverController;
     UIImageView *imageView;
     BOOL newMedia;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 - (IBAction)useCamera;
-- (IBAction)useCameraRoll;
+- (IBAction)useCameraRoll: (id)sender;
 @end
