@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/EC2CreateReservedInstancesListingResponseUnmarshaller.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/EC2CreateReservedInstancesListingResponseUnmarshaller</TokenIdentifier>
+			<Abstract type="html">Create Reserved Instances Listing Response Unmarshaller</Abstract>
+			<DeclaredIn>EC2CreateReservedInstancesListingResponseUnmarshaller.h</DeclaredIn>
+			
+			<NodeRef refid="420"/>
+		</Token>
+		
+		
+	</File>
+</Tokens>

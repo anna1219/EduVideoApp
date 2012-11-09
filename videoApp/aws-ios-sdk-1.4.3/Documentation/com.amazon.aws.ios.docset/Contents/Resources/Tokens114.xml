@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/AutoScalingDescribeTerminationPolicyTypesRequestMarshaller.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/AutoScalingDescribeTerminationPolicyTypesRequestMarshaller</TokenIdentifier>
+			<Abstract type="html">Describe Termination Policy Types Request Marshaller</Abstract>
+			<DeclaredIn>AutoScalingDescribeTerminationPolicyTypesRequestMarshaller.h</DeclaredIn>
+			
+			<NodeRef refid="114"/>
+		</Token>
+		
+		
+	</File>
+</Tokens>

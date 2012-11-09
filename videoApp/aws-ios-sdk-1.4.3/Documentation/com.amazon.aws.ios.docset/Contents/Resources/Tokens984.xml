@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/S3BucketTagSetUnmarshaller.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/S3BucketTagSetUnmarshaller</TokenIdentifier>
+			<Abstract type="html">Creates an S3BucketTagSet from an XML service repsonse.</Abstract>
+			<DeclaredIn>S3BucketTagSetUnmarshaller.h</DeclaredIn>
+			
+			<NodeRef refid="984"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/S3BucketTagSetUnmarshaller/setTagset:</TokenIdentifier>
+			<Abstract type="html">The S3BucketTagSet represented by the XML</Abstract>
+			<DeclaredIn>S3BucketTagSetUnmarshaller.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) S3BucketTagSet *tagset</Declaration>
+			
+			
+			<Anchor>//api/name/tagset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/S3BucketTagSetUnmarshaller/tagset</TokenIdentifier>
+			<Abstract type="html">The S3BucketTagSet represented by the XML</Abstract>
+			<DeclaredIn>S3BucketTagSetUnmarshaller.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) S3BucketTagSet *tagset</Declaration>
+			
+			
+			<Anchor>//api/name/tagset</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

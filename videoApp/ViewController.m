@@ -46,54 +46,37 @@
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (IBAction) useCamera: (id)sender
 {
-    if ([self.popoverController isPopoverVisible]) {
-        [self.popoverController dismissPopoverAnimated:YES];
-        [popoverController release];}
+    [self disablePopOver];
     
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeCamera])
     {
         UIImagePickerController *imagePicker =
         [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.sourceType =
-        UIImagePickerControllerSourceTypeCamera;
-        imagePicker.mediaTypes = [NSArray arrayWithObjects:
-                                  (NSString *) kUTTypeMovie,
-                                  nil];
-        imagePicker.allowsEditing = NO;
-        [self presentModalViewController:imagePicker
-                                animated:YES];
-        [imagePicker release];
+        [self setUpImagePickerController:UIImagePickerControllerSourceTypeCamera:imagePicker];
+        [self presentViewController:imagePicker
+                           animated:YES
+                         completion:NULL];
+       [imagePicker release];
         newMedia = YES;        
     }
 }
 
 - (IBAction) useCameraRoll: (id)sender
 {
-    if ([self.popoverController isPopoverVisible]) {
-        [self.popoverController dismissPopoverAnimated:YES];
-        [popoverController release];
-        
-    } else {
-        if ([UIImagePickerController isSourceTypeAvailable:
+    if ([self disablePopOver]){}
+        else if
+    ([UIImagePickerController isSourceTypeAvailable:
              UIImagePickerControllerSourceTypeSavedPhotosAlbum])
         {
             UIImagePickerController *imagePicker =
             [[UIImagePickerController alloc] init];
-            imagePicker.delegate = self;
-            imagePicker.sourceType =
-            UIImagePickerControllerSourceTypePhotoLibrary;
-            imagePicker.mediaTypes = [NSArray arrayWithObjects:
-                                      (NSString *) kUTTypeMovie,
-                                      nil];
-            imagePicker.allowsEditing = NO;
-            
+            [self setUpImagePickerController:UIImagePickerControllerSourceTypePhotoLibrary:imagePicker];
             self.popoverController = [[UIPopoverController alloc]
                                       initWithContentViewController:imagePicker];
             
@@ -107,15 +90,15 @@
             [imagePicker release];
             newMedia = NO;
         }
-    }
 }
+
 
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSString *mediaType = [info
                            objectForKey:UIImagePickerControllerMediaType];
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:NULL];
    
     if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
     
@@ -164,6 +147,23 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     // Video was saved properly. UI may need to be updated here.
 }
+
+- (Boolean)disablePopOver{
+    if ([self.popoverController isPopoverVisible]) {
+        [self.popoverController dismissPopoverAnimated:YES];
+        [popoverController release];
+        return true;}
+    else return false;
+    }
+
+- (void)setUpImagePickerController:(UIImagePickerControllerSourceType)sourceType:(UIImagePickerController *)UIpicker{
+    UIpicker.delegate = self;
+    UIpicker.sourceType = sourceType;
+    UIpicker.mediaTypes = [NSArray arrayWithObjects:
+                              (NSString *) kUTTypeMovie,
+                              nil];
+    UIpicker.allowsEditing = NO;    
+    }
 
 
 @end

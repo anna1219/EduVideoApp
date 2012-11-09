@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/S3CORSRuleUnmarshaller.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/S3CORSRuleUnmarshaller</TokenIdentifier>
+			<Abstract type="html">Creates an S3CORSRule from an XML service repsonse.</Abstract>
+			<DeclaredIn>S3CORSRuleUnmarshaller.h</DeclaredIn>
+			
+			<NodeRef refid="991"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/S3CORSRuleUnmarshaller/setRule:</TokenIdentifier>
+			<Abstract type="html">The S3CORSRule represented by the XML</Abstract>
+			<DeclaredIn>S3CORSRuleUnmarshaller.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) S3CORSRule *rule</Declaration>
+			
+			
+			<Anchor>//api/name/rule</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/S3CORSRuleUnmarshaller/rule</TokenIdentifier>
+			<Abstract type="html">The S3CORSRule represented by the XML</Abstract>
+			<DeclaredIn>S3CORSRuleUnmarshaller.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) S3CORSRule *rule</Declaration>
+			
+			
+			<Anchor>//api/name/rule</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
