@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AWSiOSSDK/S3/AmazonS3Client.h>
+#import <AWSiOSSDK/SimpleDB/AmazonSimpleDBClient.h>
+#import <AWSiOSSDK/SQS/AmazonSQSClient.h>
+#import <AWSiOSSDK/SNS/AmazonSNSClient.h>
 
 @interface VideoUpload : NSObject
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
+- (void)uploadToAmazonS3:(NSURL *)videoURL;
 
 @end

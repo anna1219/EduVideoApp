@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "VideoUpload.h"
 
 @interface ViewController ()
 
@@ -121,15 +122,21 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         UIImage *video = [info
                           objectForKey:UIImagePickerControllerOriginalImage];
         NSString *mediaPath = [[info objectForKey:UIImagePickerControllerMediaURL] path];
+        NSURL *mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
         
         imageView.image = video;
         
         if (newMedia)
-            [self SaveVideoAtPathToAppDirectory:mediaPath];
-         //   UISaveVideoAtPathToSavedPhotosAlbum(mediaPath,
-         //                                       self,
-         //                                       @selector(video:didFinishSavingWithError:contextInfo:),
-         //                                       NULL);
+        {
+            [self SaveVideoAtPathToAppDirectory:mediaPath];        
+            UISaveVideoAtPathToSavedPhotosAlbum(mediaPath,
+                                                self,
+                                                @selector(video:didFinishSavingWithError:contextInfo:),
+                                                NULL);
+            
+            VideoUpload *videoUploader = [[VideoUpload alloc] init];
+            [videoUploader uploadToAmazonS3:mediaURL];
+        }
         }
 }
 

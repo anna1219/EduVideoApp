@@ -10,24 +10,23 @@
 
 @implementation VideoUpload
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    NSURL *urlvideo = [info objectForKey:UIImagePickerControllerMediaURL];
+- (void)uploadToAmazonS3:(NSURL *)videoURL {
+    NSString *MY_ACCESS_KEY_ID = @"AKIAJQNYRX3LDPFT6GSA";
+    NSString *MY_SECRET_KEY = @"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";
+    NSString *MY_VIDEO_BUCKET = @"eduvideoapp";
+    NSString *MY_VIDEO_NAME = @"video01";
     
-  //  urlvideo contains the URL of that video file that has to be uploaded. Then convert the url into NSString type because setFile method requires NSString as a parameter
+    NSData *videoData = [NSData dataWithContentsOfURL:videoURL];
     
-    NSString *urlString=[urlvideo path];
-    NSLog(@"urlString=%@",urlString);
-    NSString *str = [NSString stringWithFormat:@"path of server"];
-    NSURL *url = [NSURL URLWithString:[str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    AmazonS3Client *s3 = [[[AmazonS3Client alloc] initWithAccessKey:MY_ACCESS_KEY_ID withSecretKey:MY_SECRET_KEY] autorelease];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setFile:urlString forKey:@"key foruploadingFile"];
-    [request setRequestMethod:@"POST"];
-    [request setDelegate:self];
-    [request startSynchronous];
-    NSLog(@"responseStatusCode %i",[request responseStatusCode]);
-    NSLog(@"responseStatusCode %@",[request responseString]);
+    [s3 createBucket:[[[S3CreateBucketRequest alloc] initWithName:MY_VIDEO_BUCKET] autorelease]];
+    
+    S3PutObjectRequest *por = [[[S3PutObjectRequest alloc] initWithKey:MY_VIDEO_NAME inBucket:MY_VIDEO_BUCKET] autorelease];
+    por.contentType = @"video/quicktime";
+    por.data = videoData;
+    [s3 putObject:por];
+    [videoData release];
 }
 
 
