@@ -24,6 +24,7 @@
 		D67996F6164AC57E0055AA0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D67996F4164AC57E0055AA0D /* InfoPlist.strings */; };
 		D67996F9164AC57E0055AA0D /* videoAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D67996F8164AC57E0055AA0D /* videoAppTests.m */; };
 		D6799703164ACCC70055AA0D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6799702164ACCC70055AA0D /* MobileCoreServices.framework */; };
+		D69422DF164D630500A83CDD /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D69422DE164D630500A83CDD /* AWSiOSSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		D67996F7164AC57E0055AA0D /* videoAppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = videoAppTests.h; sourceTree = "<group>"; };
 		D67996F8164AC57E0055AA0D /* videoAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videoAppTests.m; sourceTree = "<group>"; };
 		D6799702164ACCC70055AA0D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D69422DE164D630500A83CDD /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSiOSSDK.framework; path = "../Libraries and SDKs/aws-ios-sdk-1.4.3/AWSiOSSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				D67996C8164AC57D0055AA0D /* UIKit.framework in Frameworks */,
 				D67996CA164AC57D0055AA0D /* Foundation.framework in Frameworks */,
 				D67996CC164AC57D0055AA0D /* CoreGraphics.framework in Frameworks */,
+				D69422DF164D630500A83CDD /* AWSiOSSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +113,7 @@
 		D67996C6164AC57D0055AA0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D69422DE164D630500A83CDD /* AWSiOSSDK.framework */,
 				D67996C7164AC57D0055AA0D /* UIKit.framework */,
 				D67996C9164AC57D0055AA0D /* Foundation.framework */,
 				D67996CB164AC57D0055AA0D /* CoreGraphics.framework */,
@@ -379,6 +383,10 @@
 		D67996FD164AC57E0055AA0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Libraries and SDKs/aws-ios-sdk-1.4.3\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "videoApp/videoApp-Prefix.pch";
 				INFOPLIST_FILE = "videoApp/videoApp-Info.plist";
@@ -390,6 +398,10 @@
 		D67996FE164AC57E0055AA0D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Libraries and SDKs/aws-ios-sdk-1.4.3\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "videoApp/videoApp-Prefix.pch";
 				INFOPLIST_FILE = "videoApp/videoApp-Info.plist";
@@ -451,6 +463,7 @@
 				D67996FE164AC57E0055AA0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D67996FF164AC57E0055AA0D /* Build configuration list for PBXNativeTarget "videoAppTests" */ = {
 			isa = XCConfigurationList;
@@ -459,6 +472,7 @@
 				D6799701164AC57E0055AA0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

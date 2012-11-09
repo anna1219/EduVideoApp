@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <AWSiOSSDK/S3/AmazonS3Client.h>
+#import <AWSiOSSDK/SimpleDB/AmazonSimpleDBClient.h>
+#import <AWSiOSSDK/SQS/AmazonSQSClient.h>
+#import <AWSiOSSDK/SNS/AmazonSNSClient.h>
 
 @interface ViewController : UIViewController
 <UIImagePickerControllerDelegate,
