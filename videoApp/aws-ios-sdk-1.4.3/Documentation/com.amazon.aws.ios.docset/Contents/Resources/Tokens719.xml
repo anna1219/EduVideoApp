@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/EC2PricingDetailUnmarshaller.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/EC2PricingDetailUnmarshaller</TokenIdentifier>
+			<Abstract type="html">Pricing Detail Unmarshaller</Abstract>
+			<DeclaredIn>EC2PricingDetailUnmarshaller.h</DeclaredIn>
+			
+			<NodeRef refid="719"/>
+		</Token>
+		
+		
+	</File>
+</Tokens>

@@ -28,4 +28,6 @@ UINavigationControllerDelegate,UIPopoverControllerDelegate>
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 - (IBAction)useCamera;
 - (IBAction)useCameraRoll: (id)sender;
+- (Boolean)disablePopOver;
+- (void)setUpImagePickerController: (UIImagePickerControllerSourceType)sourceType: (UIImagePickerController *)UIpicker;
 @end
