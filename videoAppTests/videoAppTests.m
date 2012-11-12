@@ -7,12 +7,16 @@
 //
 
 #import "videoAppTests.h"
+#import "OCMock.h"
+#import "OCMockObject.h"
+#import "ViewController.h"
 
 @implementation videoAppTests
 
 - (void)setUp
 {
-    [super setUp];
+    id mockUIImagePickerController = [OCMockObject mockForClass:[UIImagePickerController class]];
+    id mockViewController = [OCMockObject mockForClass:[ViewController class]];
     
     // Set-up code here.
 }
@@ -24,8 +28,14 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)shouldReturnNewMediaIsYes
 {
+  //  static UIImagePickerController mockUIImagePickerController;
+    
+    mockUIImagePickerController.isSourceTypeAvailable = YES;
+    [mockViewController useCamera];
+    
+    
     STFail(@"Unit tests are not implemented yet in videoAppTests");
 }
 

@@ -63,8 +63,16 @@
         [self presentViewController:imagePicker
                            animated:YES
                          completion:NULL];
-       [imagePicker release];
+        [imagePicker release];
         newMedia = YES;        
+    }
+    else
+    {
+        newMedia = NO;
+        NSLog(@"Camera does not work");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Camera is not available" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
     }
 }
 
@@ -100,14 +108,11 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     NSString *mediaType = [info
                            objectForKey:UIImagePickerControllerMediaType];
     [self dismissViewControllerAnimated:YES completion:NULL];
-   
-    if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
     
  //       UIImage *video = [info
  //                         objectForKey:UIImagePickerControllerOriginalImage];
         NSString *mediaPath = [[info objectForKey:UIImagePickerControllerMediaURL] path];
         NSURL *mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
-        
         //imageView.image = video;
         
         if (newMedia)
@@ -121,7 +126,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             self.videoUploader = [[VideoUpload alloc] init];
             [self.videoUploader uploadToAmazonS3:mediaURL];
             [self.videoUploader release];
-        }
         }
 }
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D63940A816515CCF001820C2 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D63940A716515CCF001820C2 /* AWSiOSSDK.framework */; };
+		D63940AA16518779001820C2 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D63940A916518779001820C2 /* libOCMock.a */; };
+		D63940AC1651882B001820C2 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D63940AB1651882B001820C2 /* libOCMock.a */; };
 		D66562B5164D6708009BBCB8 /* VideoUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = D66562B4164D6708009BBCB8 /* VideoUpload.m */; };
 		D67996C8164AC57D0055AA0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D67996C7164AC57D0055AA0D /* UIKit.framework */; };
 		D67996CA164AC57D0055AA0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D67996C9164AC57D0055AA0D /* Foundation.framework */; };
@@ -40,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		D63940A716515CCF001820C2 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSiOSSDK.framework; path = "videoApp/aws-ios-sdk-1.4.3/AWSiOSSDK.framework"; sourceTree = "<group>"; };
+		D63940A916518779001820C2 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "../../../../Volumes/OCMock 2.0.1/iOS/libOCMock.a"; sourceTree = "<group>"; };
+		D63940AB1651882B001820C2 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = usr/include/libOCMock.a; sourceTree = "<group>"; };
 		D66562B3164D6708009BBCB8 /* VideoUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoUpload.h; sourceTree = "<group>"; };
 		D66562B4164D6708009BBCB8 /* VideoUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoUpload.m; sourceTree = "<group>"; };
 		D67996C3164AC57D0055AA0D /* videoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = videoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D63940AC1651882B001820C2 /* libOCMock.a in Frameworks */,
+				D63940AA16518779001820C2 /* libOCMock.a in Frameworks */,
 				D67996EC164AC57E0055AA0D /* SenTestingKit.framework in Frameworks */,
 				D67996ED164AC57E0055AA0D /* UIKit.framework in Frameworks */,
 				D67996EE164AC57E0055AA0D /* Foundation.framework in Frameworks */,
@@ -96,6 +102,8 @@
 		D67996B8164AC57D0055AA0D = {
 			isa = PBXGroup;
 			children = (
+				D63940AB1651882B001820C2 /* libOCMock.a */,
+				D63940A916518779001820C2 /* libOCMock.a */,
 				D6799702164ACCC70055AA0D /* MobileCoreServices.framework */,
 				D67996CD164AC57D0055AA0D /* videoApp */,
 				D67996F1164AC57E0055AA0D /* videoAppTests */,
@@ -429,8 +437,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "videoApp/videoApp-Prefix.pch";
 				INFOPLIST_FILE = "videoAppTests/videoAppTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"/Volumes/OCMock 2.0.1/iOS\"",
+					"\"$(SRCROOT)/usr/include\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = usr/include/OCMock;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -446,8 +460,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "videoApp/videoApp-Prefix.pch";
 				INFOPLIST_FILE = "videoAppTests/videoAppTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"/Volumes/OCMock 2.0.1/iOS\"",
+					"\"$(SRCROOT)/usr/include\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = usr/include/OCMock;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;

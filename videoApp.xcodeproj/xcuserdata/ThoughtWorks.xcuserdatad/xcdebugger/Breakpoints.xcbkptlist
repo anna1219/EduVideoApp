@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "videoApp/ViewController.m"
-         timestampString = "374434286.921969"
+         timestampString = "374446966.662605"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
+         startingLineNumber = "115"
+         endingLineNumber = "115"
          landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -45,11 +45,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "videoApp/ViewController.m"
-         timestampString = "374434286.921969"
+         timestampString = "374446966.662605"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
          landmarkName = "-useCameraRoll:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -97,11 +97,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "videoApp/ViewController.m"
-         timestampString = "374434286.921969"
+         timestampString = "374446966.662605"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "-useCameraRoll:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -110,11 +110,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "videoApp/ViewController.m"
-         timestampString = "374434286.921969"
+         timestampString = "374446966.662605"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
          landmarkName = "-useCameraRoll:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -123,11 +123,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "videoApp/ViewController.m"
-         timestampString = "374434286.921969"
+         timestampString = "374446966.662605"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "92"
-         endingLineNumber = "92"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
          landmarkName = "-useCameraRoll:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -149,11 +149,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "videoApp/ViewController.m"
-         timestampString = "374434286.921969"
+         timestampString = "374446966.662605"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "73"
-         endingLineNumber = "73"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
          landmarkName = "-useCameraRoll:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -175,11 +175,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "videoApp/ViewController.m"
-         timestampString = "374434395.487857"
+         timestampString = "374446966.662605"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "122"
-         endingLineNumber = "122"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
          landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -214,11 +214,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "videoApp/ViewController.m"
-         timestampString = "374434395.487857"
+         timestampString = "374446966.662605"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "124"
-         endingLineNumber = "124"
+         startingLineNumber = "129"
+         endingLineNumber = "129"
          landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -259,6 +259,19 @@
          startingLineNumber = "30"
          endingLineNumber = "30"
          landmarkName = "-uploadToAmazonS3:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "videoApp/ViewController.m"
+         timestampString = "374446966.662605"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
+         landmarkName = "-useCamera:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
