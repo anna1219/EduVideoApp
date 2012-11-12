@@ -99,6 +99,14 @@
             [imagePicker release];
             newMedia = NO;
         }
+        else
+        {
+            NSLog(@"Photo Library does not work");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Photo library is not available" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+            newMedia = NO;
+        }
 }
 
 

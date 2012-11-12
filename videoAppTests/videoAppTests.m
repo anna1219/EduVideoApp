@@ -17,6 +17,7 @@
 {
     id mockUIImagePickerController = [OCMockObject mockForClass:[UIImagePickerController class]];
     id mockViewController = [OCMockObject mockForClass:[ViewController class]];
+    //id mockPopOverController = [OCMockObject mockForClass:[UIPopoverController class]];
     
     // Set-up code here.
 }
@@ -25,15 +26,18 @@
 {
     // Tear-down code here.
     
-    [super tearDown];
+    [super tearDown];               
 }
 
-- (void)shouldReturnNewMediaIsYes
+- (void)popOverShouldBeVisible
 {
-  //  static UIImagePickerController mockUIImagePickerController;
+    @interface mockViewController()
+    {
+        UIPopoverController *popoverController;
+    }
+    @property (retain) UIPopoverController *popoverController;
     
-    mockUIImagePickerController.isSourceTypeAvailable = YES;
-    [mockViewController useCamera];
+    
     
     
     STFail(@"Unit tests are not implemented yet in videoAppTests");
