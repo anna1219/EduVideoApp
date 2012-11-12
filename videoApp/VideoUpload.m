@@ -20,12 +20,13 @@
     
     AmazonS3Client *s3 = [[[AmazonS3Client alloc] initWithAccessKey:MY_ACCESS_KEY_ID withSecretKey:MY_SECRET_KEY] autorelease];
     
-    [s3 createBucket:[[[S3CreateBucketRequest alloc] initWithName:MY_VIDEO_BUCKET] autorelease]];
+ //   [s3 createBucket:[[[S3CreateBucketRequest alloc] initWithName:MY_VIDEO_BUCKET] autorelease]];
     
-    S3PutObjectRequest *por = [[[S3PutObjectRequest alloc] initWithKey:MY_VIDEO_NAME inBucket:MY_VIDEO_BUCKET] autorelease];
+    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:MY_VIDEO_NAME inBucket:MY_VIDEO_BUCKET];
     por.contentType = @"video/quicktime";
     por.data = videoData;
     [s3 putObject:por];
+     NSLog(@"did upload to amazon");
     [videoData release];
 }
 

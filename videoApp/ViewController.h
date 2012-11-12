@@ -12,6 +12,7 @@
 #import <AWSiOSSDK/SimpleDB/AmazonSimpleDBClient.h>
 #import <AWSiOSSDK/SQS/AmazonSQSClient.h>
 #import <AWSiOSSDK/SNS/AmazonSNSClient.h>
+#import "VideoUpload.h"
 
 @interface ViewController : UIViewController
 <UIImagePickerControllerDelegate,
@@ -20,12 +21,14 @@ UINavigationControllerDelegate,UIPopoverControllerDelegate>
     UIToolbar *toolbar;
     UIPopoverController *popoverController;
     UIImageView *imageView;
+    VideoUpload *videoUploader;
     BOOL newMedia;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) UIPopoverController *popoverController;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) VideoUpload *videoUploader;
 - (IBAction)useCamera;
 - (IBAction)useCameraRoll: (id)sender;
 - (Boolean)disablePopOver;

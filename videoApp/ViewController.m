@@ -17,6 +17,7 @@
 @implementation ViewController
 
 @synthesize imageView, popoverController, toolbar;
+@synthesize videoUploader = _videoUploader;
 
 - (void)viewDidLoad
 {
@@ -102,12 +103,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    
     if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
     
-        UIImage *video = [info
-                          objectForKey:UIImagePickerControllerOriginalImage];
+ //       UIImage *video = [info
+ //                         objectForKey:UIImagePickerControllerOriginalImage];
         NSString *mediaPath = [[info objectForKey:UIImagePickerControllerMediaURL] path];
         NSURL *mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
         
-        imageView.image = video;
+        //imageView.image = video;
         
         if (newMedia)
         {
@@ -117,8 +118,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                                                 @selector(video:didFinishSavingWithError:contextInfo:),
                                                 NULL);
             
-            VideoUpload *videoUploader = [[VideoUpload alloc] init];
-            [videoUploader uploadToAmazonS3:mediaURL];
+            self.videoUploader = [[VideoUpload alloc] init];
+            [self.videoUploader uploadToAmazonS3:mediaURL];
+            [self.videoUploader release];
         }
         }
 }
