@@ -10,11 +10,11 @@
 
 @implementation VideoUpload
 
-- (void)uploadToAmazonS3:(NSURL *)videoURL {
+- (void)uploadToAmazonS3:(NSURL *)videoURL withVideoName:(NSString *)videoName {
     NSString *MY_ACCESS_KEY_ID = @"AKIAJQNYRX3LDPFT6GSA";
     NSString *MY_SECRET_KEY = @"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";
     NSString *MY_VIDEO_BUCKET = @"eduvideoapp";
-    NSString *MY_VIDEO_NAME = @"video01";
+    NSString *MY_VIDEO_NAME = videoName;
     
     NSData *videoData = [NSData dataWithContentsOfURL:videoURL];
     

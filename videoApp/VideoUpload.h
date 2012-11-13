@@ -14,6 +14,6 @@
 
 @interface VideoUpload : NSObject
 
-- (void)uploadToAmazonS3:(NSURL *)videoURL;
+- (void)uploadToAmazonS3:(NSURL *)videoURL withVideoName:(NSString *)videoName;
 
 @end

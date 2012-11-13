@@ -113,41 +113,45 @@
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSString *mediaType = [info
-                           objectForKey:UIImagePickerControllerMediaType];
     [self dismissViewControllerAnimated:YES completion:NULL];
+    NSString *mediaPath = [[info objectForKey:UIImagePickerControllerMediaURL] path];
+    NSURL *mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
     
- //       UIImage *video = [info
- //                         objectForKey:UIImagePickerControllerOriginalImage];
-        NSString *mediaPath = [[info objectForKey:UIImagePickerControllerMediaURL] path];
-        NSURL *mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
-        //imageView.image = video;
-        
-        if (newMedia)
+    if (newMedia)
         {
-            [self SaveVideoAtPathToAppDirectory:mediaPath];        
+            NSString *videoName = [self SaveVideoAtPathToAppDirectory:mediaPath];
             UISaveVideoAtPathToSavedPhotosAlbum(mediaPath,
                                                 self,
                                                 @selector(video:didFinishSavingWithError:contextInfo:),
                                                 NULL);
             
             self.videoUploader = [[VideoUpload alloc] init];
-            [self.videoUploader uploadToAmazonS3:mediaURL];
-            [self.videoUploader release];
+            [self.videoUploader uploadToAmazonS3:mediaURL withVideoName:videoName];
+            [self.videoUploader release];*
         }
 }
 
-- (void)SaveVideoAtPathToAppDirectory:(NSString *)mediaPath
+- (NSString *)SaveVideoAtPathToAppDirectory:(NSString *)mediaPath
 {
+    NSString *timeCreatedAsMOV = [self getTimeVideoWasCreatedAsMOV];
+    NSLog(@"time - %@", timeCreatedAsMOV);
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,  NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *videoFile = [documentPath stringByAppendingPathComponent:timeCreatedAsMOV];
     
     NSError *error;
     
     NSLog(@"documentPath - %@", documentPath);
+    NSLog(@"videoFile - %@", videoFile);
     
     [[NSFileManager defaultManager] copyItemAtPath:mediaPath
-                                            toPath:documentPath
-                                             error:&error];    
+                                            toPath:videoFile
+                                             error:&error];
+    NSArray *pathArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentPath
+                                                                             error:&error];    
+    NSLog(@"content: %@", pathArray);
+    
+    return timeCreatedAsMOV;
+    
 }
 
 - (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo: (void *)contextInfo
@@ -155,11 +159,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     if (!videoPath && error)
     {
         NSLog(@"Error saving video to saved photos roll: %@, %@", error, [error userInfo]);
-        // Handle error;
         return;
     }
-    
-    // Video was saved properly. UI may need to be updated here.
 }
 
 - (Boolean)disablePopOver{
@@ -178,6 +179,22 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                               nil];
     UIpicker.allowsEditing = NO;    
     }
+
+- (NSString *)getTimeVideoWasCreatedAsMOV{
+    NSDate *newDate = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterLongStyle];
+    NSString *dateAsString = [formatter stringForObjectValue:newDate];
+    NSString *movFile = [dateAsString stringByAppendingPathComponent:@".mov"];
+    movFile = [movFile stringByReplacingOccurrencesOfString:@"T/" withString:@"T"];
+    movFile = [movFile stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    movFile = [movFile stringByReplacingOccurrencesOfString:@"," withString:@"_"];
+    movFile = [movFile stringByReplacingOccurrencesOfString:@" " withString:@""];
+    movFile = [movFile stringByReplacingOccurrencesOfString:@":" withString:@"_"];
+    return movFile;
+}
 
 
 @end
