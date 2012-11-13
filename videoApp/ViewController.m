@@ -1,11 +1,3 @@
-//
-//  ViewController.m
-//  videoApp
-//
-//  Created by Anna Yu on 11/7/12.
-//  Copyright (c) 2012 Anna Yu. All rights reserved.
-//
-
 #import "ViewController.h"
 #import "VideoUpload.h"
 
@@ -119,40 +111,41 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     if (newMedia)
         {
-            NSString *videoName = [self SaveVideoAtPathToAppDirectory:mediaPath];
+            self.videoUploader = [[VideoUpload alloc] init];
+            [self.videoUploader setVideoNameAsTimeCreated];
+            [self.videoUploader SaveVideoAtPathToAppDirectory:mediaPath];
             UISaveVideoAtPathToSavedPhotosAlbum(mediaPath,
                                                 self,
                                                 @selector(video:didFinishSavingWithError:contextInfo:),
                                                 NULL);
             
-            self.videoUploader = [[VideoUpload alloc] init];
-            [self.videoUploader uploadToAmazonS3:mediaURL withVideoName:videoName];
-            [self.videoUploader release];*
+            [self.videoUploader uploadToAmazonS3:mediaURL];
+            [self.videoUploader release];
         }
 }
 
-- (NSString *)SaveVideoAtPathToAppDirectory:(NSString *)mediaPath
-{
-    NSString *timeCreatedAsMOV = [self getTimeVideoWasCreatedAsMOV];
-    NSLog(@"time - %@", timeCreatedAsMOV);
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,  NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *videoFile = [documentPath stringByAppendingPathComponent:timeCreatedAsMOV];
-    
-    NSError *error;
-    
-    NSLog(@"documentPath - %@", documentPath);
-    NSLog(@"videoFile - %@", videoFile);
-    
-    [[NSFileManager defaultManager] copyItemAtPath:mediaPath
-                                            toPath:videoFile
-                                             error:&error];
-    NSArray *pathArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentPath
-                                                                             error:&error];    
-    NSLog(@"content: %@", pathArray);
-    
-    return timeCreatedAsMOV;
-    
-}
+//- (NSString *)SaveVideoAtPathToAppDirectory:(NSString *)mediaPath
+//{
+//    NSString *timeCreatedAsMOV = [self getTimeVideoWasCreatedAsMOV];
+//    NSLog(@"time - %@", timeCreatedAsMOV);
+//    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,  NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *videoFile = [documentPath stringByAppendingPathComponent:timeCreatedAsMOV];
+//    
+//    NSError *error;
+//    
+//    NSLog(@"documentPath - %@", documentPath);
+//    NSLog(@"videoFile - %@", videoFile);
+//    
+//    [[NSFileManager defaultManager] copyItemAtPath:mediaPath
+//                                            toPath:videoFile
+//                                             error:&error];
+//    NSArray *pathArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentPath
+//                                                                             error:&error];    
+//    NSLog(@"content: %@", pathArray);
+//    
+//    return timeCreatedAsMOV;
+//    
+//}
 
 - (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo: (void *)contextInfo
 {
@@ -180,21 +173,21 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     UIpicker.allowsEditing = NO;    
     }
 
-- (NSString *)getTimeVideoWasCreatedAsMOV{
-    NSDate *newDate = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [formatter setDateStyle:NSDateFormatterShortStyle];
-    [formatter setTimeStyle:NSDateFormatterLongStyle];
-    NSString *dateAsString = [formatter stringForObjectValue:newDate];
-    NSString *movFile = [dateAsString stringByAppendingPathComponent:@".mov"];
-    movFile = [movFile stringByReplacingOccurrencesOfString:@"T/" withString:@"T"];
-    movFile = [movFile stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
-    movFile = [movFile stringByReplacingOccurrencesOfString:@"," withString:@"_"];
-    movFile = [movFile stringByReplacingOccurrencesOfString:@" " withString:@""];
-    movFile = [movFile stringByReplacingOccurrencesOfString:@":" withString:@"_"];
-    return movFile;
-}
+//- (NSString *)getTimeVideoWasCreatedAsMOV{
+//    NSDate *newDate = [NSDate date];
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+//    [formatter setDateStyle:NSDateFormatterShortStyle];
+//    [formatter setTimeStyle:NSDateFormatterLongStyle];
+//    NSString *dateAsString = [formatter stringForObjectValue:newDate];
+//    NSString *movFile = [dateAsString stringByAppendingPathComponent:@".mov"];
+//    movFile = [movFile stringByReplacingOccurrencesOfString:@"T/" withString:@"T"];
+//    movFile = [movFile stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+//    movFile = [movFile stringByReplacingOccurrencesOfString:@"," withString:@"_"];
+//    movFile = [movFile stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    movFile = [movFile stringByReplacingOccurrencesOfString:@":" withString:@"_"];
+//    return movFile;
+//}
 
 
 @end

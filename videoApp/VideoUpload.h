@@ -13,7 +13,10 @@
 #import <AWSiOSSDK/SNS/AmazonSNSClient.h>
 
 @interface VideoUpload : NSObject
+@property (strong, nonatomic) NSString *videoName;
 
-- (void)uploadToAmazonS3:(NSURL *)videoURL withVideoName:(NSString *)videoName;
+- (void)uploadToAmazonS3:(NSURL *)videoURL;
+- (void)SaveVideoAtPathToAppDirectory:(NSString *)mediaPath;
+- (void)setVideoNameAsTimeCreated;
 
 @end
